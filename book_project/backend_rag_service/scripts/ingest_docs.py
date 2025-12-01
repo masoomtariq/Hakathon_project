@@ -7,6 +7,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from qdrant_client import QdrantClient
 import sys
+from app.services.qdrant import generate_gemini_embedding
 # Add the project root (one level above chatbot_backend) to sys.path
 sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 
@@ -17,7 +18,7 @@ load_dotenv(dotenv_path=Path(__file__).parent.parent / ".env")
 
 QDRANT_HOST = os.getenv("QDRANT_HOST")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
-COLLECTION_NAME = "book_content"
+COLLECTION_NAME = "book_collection"
 
 # Logging setup
 logging.basicConfig(level=logging.DEBUG)
@@ -43,11 +44,9 @@ if not client.collection_exists(COLLECTION_NAME):
 else:
     logger.info(f"Collection '{COLLECTION_NAME}' already exists.")
 
-from chatbot_backend.app.services.qdrant import generate_gemini_embedding
-
 # Read and process documents
 async def ingest_documents():
-    docs_path = Path(__file__).parent.parent / "website" / "docs"
+    docs_path = Path(__file__).parent.parent / "book_source" / "docs"
     md_files = list(docs_path.rglob("*.md"))
 
     for doc_file in md_files:

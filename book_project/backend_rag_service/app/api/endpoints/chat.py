@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Body
 from typing import Annotated
-from ...services.rag_service import generate_rag_response
+from services.rag_service import generate_rag_response
 
 router = APIRouter()
 

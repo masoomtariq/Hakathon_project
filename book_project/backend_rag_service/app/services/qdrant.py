@@ -18,7 +18,7 @@ def get_qdrant_client() -> QdrantClient:
 
 def generate_gemini_embedding(text: str) -> list[float]:
     try:
-        response = genai.embed_content(model="models/embedding-001", content=text)
+        response = genai.embed_content(model="models/gemini-embedding-001", content=text)
         return response['embedding']
     except Exception as e:
         print(f"Error generating Gemini embedding: {e}")

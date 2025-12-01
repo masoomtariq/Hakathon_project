@@ -6,7 +6,7 @@ website/.docusaurus/
 website/build/
 
 # FastAPI
-backend_rag_service/*__pycache__/
+__pycache__
 backend_rag_service/.venv
 backend_rag_service/.env
 

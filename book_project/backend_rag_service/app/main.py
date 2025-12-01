@@ -3,6 +3,7 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from api.router import api_router
 
 # Load environment variables from .env file
 load_dotenv()
@@ -33,5 +34,4 @@ app.add_middleware(
 async def root():
     return {"message": "Welcome to the Physical AI & Humanoid Robotics Textbook Chatbot Backend!"}
 
-from .api.router import api_router
 app.include_router(api_router)

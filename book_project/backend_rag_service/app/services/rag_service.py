@@ -3,7 +3,7 @@ import google.generativeai as genai
 from typing import List, Dict, Any
 
 from qdrant_client.http.models import Filter, FieldCondition, MatchValue
-from app.services.qdrant import get_qdrant_client, generate_gemini_embedding
+from .qdrant import get_qdrant_client, generate_gemini_embedding
 
 # Configure Gemini API - moved to main.py
 # GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -15,13 +15,13 @@ from app.services.qdrant import get_qdrant_client, generate_gemini_embedding
 def get_gemini_model():
     try:
         # Ensure the model is available before returning
-        model = genai.GenerativeModel('gemini-pro')
+        model = genai.GenerativeModel('gemini-2.5-flash')
         return model
     except Exception as e:
         print(f"Error initializing Gemini model: {e}")
         return None
 
-async def retrieve_context_from_qdrant(query_embedding: List[float], collection_name: str, limit: int = 3, selected_text: str = None) -> List[Dict[str, Any]]:
+def retrieve_context_from_qdrant(query_embedding: List[float], collection_name: str, limit: int = 3, selected_text: str = None) -> List[Dict[str, Any]]:
     qdrant_client = get_qdrant_client()
     search_params = {"hnsw_ef": 128, "exact": False}
 
@@ -69,15 +69,13 @@ async def generate_rag_response(user_query: str, collection_name: str, selected_
 
     # 3. Construct prompt for Gemini with retrieved context
     context_str = "\n".join([doc["text"] for doc in context])
-    prompt_parts = [
-        f"You are a helpful assistant for a Physical AI & Humanoid Robotics textbook. Answer the user's question based ONLY on the following context. If the answer is not in the context, state that you don't know.\n\nContext:\n{context_str}\n\nQuestion: {user_query}",
-    ]
+    prompt = f"You are a helpful assistant for a Physical AI & Humanoid Robotics textbook. Answer the user's question based ONLY on the following context. If the answer is not in the context, state that you don't know.\n\nContext:\n{context_str}\n\nQuestion: {user_query}"
     if selected_text:
-        prompt_parts.insert(0, f"The user has also highlighted this text: {selected_text}\n")
+        prompt = f"The user has also highlighted this text: {selected_text}\n\n" + prompt
 
     # 4. Generate response using Gemini
     try:
-        response = await gemini_model.generate_content_async(prompt_parts)
+        response = gemini_model.generate_content(prompt)
         return response.text
     except Exception as e:
         print(f"Error generating Gemini response: {e}")
