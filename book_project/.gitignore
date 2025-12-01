@@ -6,10 +6,9 @@ website/.docusaurus/
 website/build/
 
 # FastAPI
-chatbot_backend/__pycache__/
-chatbot_backend/.venv/
-chatbot_backend/*.pyc
-chatbot_backend/.env
+backend_rag_service/*__pycache__/
+backend_rag_service/.venv
+backend_rag_service/.env
 
 # General
 .DS_Store
