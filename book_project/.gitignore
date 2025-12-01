@@ -1,14 +1,10 @@
 # Gitignore for Physical AI & Humanoid Robotics Textbook Project
-.venv
+
 # Docusaurus
 website/node_modules/
 website/.docusaurus/
 website/build/
 
-# FastAPI
-__pycache__
-backend_rag_service/.venv
-backend_rag_service/.env
 
 # General
 .DS_Store
