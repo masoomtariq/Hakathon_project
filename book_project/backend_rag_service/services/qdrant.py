@@ -47,7 +47,7 @@ def generate_gemini_embedding(text: str):
         print(f"Error generating Gemini embedding: {e}")
         return []
 
-def retrieve_context_from_qdrant(query_embedding, limit: int = 3, source_file: str = None):
+def retrieve_context_from_qdrant(query_embedding, limit: int = 3, selected_text: str = None):
     """
     Retrieves context. 
     NOTE: I changed 'selected_text' to 'source_file' because filtering by 
@@ -61,11 +61,11 @@ def retrieve_context_from_qdrant(query_embedding, limit: int = 3, source_file: s
     query_filter = None
     
     # FIX: Filter by metadata (source), NOT by the text body content
-    if source_file:
+    if selected_text:
         query_filter = Filter(must=[
             FieldCondition(
                 key="source", 
-                match=MatchValue(value=source_file)
+                match=MatchValue(value=selected_text)
             )
         ])
 
