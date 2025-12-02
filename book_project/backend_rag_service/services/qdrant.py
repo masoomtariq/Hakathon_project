@@ -24,7 +24,7 @@ else:
 def generate_gemini_embedding(text: str):
     try:
         result = client.models.embed_content(
-        model="gemini-embedding-001",
+        model="text-embedding-004",
         contents=text)
         return result.embeddings
     except Exception as e:

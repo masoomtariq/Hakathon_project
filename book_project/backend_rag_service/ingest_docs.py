@@ -37,7 +37,7 @@ else:
 if not client.collection_exists(COLLECTION_NAME):
     client.recreate_collection(
         collection_name=COLLECTION_NAME,
-        vectors_config=VectorParams(size=3072, distance=Distance.COSINE)
+        vectors_config=VectorParams(size=768, distance=Distance.COSINE)
     )
 else:
     print(f"Collection '{COLLECTION_NAME}' already exists.")
@@ -55,7 +55,7 @@ async def ingest_documents():
             continue
 
         # Simple chunking by 500 characters
-        chunks = [text[i:i+510] for i in range(0, len(text), 500)]
+        chunks = [text[i:i+1350] for i in range(0, len(text), 1200)]
         points = []
 
         for chunk in chunks:
