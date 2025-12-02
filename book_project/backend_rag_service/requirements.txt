@@ -1,6 +1,6 @@
 fastapi
 uvicorn
-google-generativeai
+google-genai
 qdrant-client
 python-dotenv
 asyncpg  # for Neon Serverless Postgres
