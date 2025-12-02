@@ -1,6 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
-from book_project.backend_rag_service.main import app as fastapi_app  # Assuming app is in chatbot_backend/app/main.py
+from main import app as fastapi_app  # Assuming app is in chatbot_backend/app/main.py
 
 # Adjust this if your main app is in a different location
 
@@ -13,7 +13,7 @@ def test_rag_chat_endpoint():
 
         response = client.post("/rag/chat", json={
             "user_query": "What is ROS 2?",
-            "collection_name": "book_content" # Ensure this collection exists and is populated
+            "collection_name": "book_collection" # Ensure this collection exists and is populated
         })
 
         assert response.status_code == 200

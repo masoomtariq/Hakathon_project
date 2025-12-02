@@ -13,19 +13,18 @@ load_dotenv()
 # Import the actual qdrant_client from the services module
 # This might need adjustment based on how the client is exposed.
 # For now, let's assume get_qdrant_client() is callable directly or mocked.
-from chatbot_backend.app.services.qdrant import get_qdrant_client
+from services.qdrant import qdrant_client
 
 @pytest.fixture(scope="module")
 def qdrant_test_client():
-    client = get_qdrant_client()
     # Ensure the client is connected before tests run
     # In a real scenario, you might have a dedicated test collection
     # or clear existing data.
     try:
-        client.get_collections()
+        qdrant_client.get_collections()
     except Exception as e:
         pytest.fail(f"Qdrant client initialization failed: {e}")
-    return client
+    return qdrant_client
 
 def test_qdrant_connection(qdrant_test_client):
     # If the fixture ran without failing, the connection is good
