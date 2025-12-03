@@ -31,13 +31,28 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        # navigate to your subfolder where package.json is
+        working-directory: ./book_project/book_source
+        run: npm ci
+
+      - name: Build Website
+        # navigate to your subfolder and build
+        working-directory: ./book_project/book_source
+        run: npm run build
+      # --- NEW STEPS END HERE ---
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
+          # Now this folder actually exists because we built it above
           path: ./book_project/book_source/build
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
