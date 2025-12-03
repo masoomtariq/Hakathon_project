@@ -9,7 +9,8 @@ app = FastAPI()
 
 # Configure CORS
 origins = [
-    os.getenv("FRONTEND_URL")
+    "http://localhost:3000",
+    "https://masoomtariq.github.io"
 ]
 
 app.add_middleware(
