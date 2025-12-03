@@ -13,6 +13,11 @@ const config: Config = {
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
+  // 1. UPDATE THIS: URL of your deployed Render backend
+  // Do not add a trailing slash (e.g., use "https://my-app.onrender.com")
+  customFields: {
+    chatbotBackendUrl: 'https://your-render-service-name.onrender.com', 
+  },
 
   // Set the production url of your site here
   url: 'https://masoomtariq.github.io',
