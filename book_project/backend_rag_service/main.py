@@ -10,7 +10,8 @@ app = FastAPI()
 # Configure CORS
 origins = [
     "http://localhost:3000",
-    "https://masoomtariq.github.io"
+    "https://masoomtariq.github.io",
+    "https://robotics-liart.vercel.app"
 ]
 
 app.add_middleware(
