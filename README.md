@@ -35,6 +35,77 @@ This is more than a textbook. This is the future of education. A platform where 
 
 The magic happens through a seamless integration between the frontend and backend. A custom **React Chatbot component** is embedded within the Docusaurus site. When you ask a question, this component sends a request to the **FastAPI backend hosted on Render**. The backend then uses the Qdrant vector database to find the most relevant sections of the textbook and feeds that context to the Gemini LLM to generate a precise, helpful answer, which is streamed back to you.
 
+## Project Structure
+
+```
+Hakathon_project/
+└───book_project/
+    ├───CLAUDE.md
+    ├───Hackathon I_ Physical AI & Humanoid Robotics Textbook.md
+    ├───.specify/
+    │   ├───memory/
+    │   │   └───constitution.md
+    │   └───templates/
+    ├───agents/
+    │   ├───__init__.py
+    │   ├───base_agent.py
+    │   └───subagent_chapter_summarizer/
+    │       ├───__init__.py
+    │       ├───agent.py
+    │       └───test_agent.py
+    ├───backend_rag_service/
+    │   ├───__init__.py
+    │   ├───conftest.py
+    │   ├───ingest_docs.py
+    │   ├───main.py
+    │   ├───requirements.txt
+    │   ├───services/
+    │   │   ├───__init__.py
+    │   │   ├───database.py
+    │   │   ├───qdrant.py
+    │   │   └───rag_service.py
+    │   └───tests/
+    │       ├───__init__.py
+    │       ├───test_qdrant.py
+    │       └───test_rag.py
+    ├───book_source/
+    │   ├───package-lock.json
+    │   ├───package.json
+    │   ├───sidebars.ts
+    │   ├───tsconfig.json
+    │   ├───blog/
+    │   ├───docs/
+    │   │   ├───assessments.md
+    │   │   ├───hardware_requirements.md
+    │   │   ├───introduction.md
+    │   │   ├───module1_ros2.md
+    │   │   ├───module2_digital_twin.md
+    │   │   ├───module3_ai_robot_brain.md
+    │   │   └───module4_vla.md
+    │   ├───src/
+    │   │   ├───components/
+    │   │   │   ├───Chatbot.js
+    │   │   │   ├───Chatbot.module.css
+    │   │   │   └───HomepageFeatures/
+    │   │   ├───css/
+    │   │   ├───pages/
+    │   │   │   ├───index.module.css
+    │   │   │   ├───index.tsx
+    │   │   │   └───markdown-page.md
+    │   │   └───theme/
+    │   │       └───Layout/
+    │   └───static/
+    ├───history/
+    │   └───prompts/
+    │       └───physical-ai-robotics-textbook/
+    │           └───0001-run-project-debug-and-improve-ui-ux.misc.prompt.md
+    └───specs/
+        └───physical-ai-robotics-textbook/
+            ├───plan.md
+            ├───spec.md
+            └───tasks.md
+```
+
 ## Installation
 
 To get this project running locally, you'll need to set up the frontend and backend separately.
