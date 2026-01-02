@@ -152,4 +152,4 @@ To get this project running locally, you'll need to set up the frontend and back
     ```bash
     uvicorn main:app --reload
     ```
-    The FastAPI service will be running at `http://localhost:8000`.
+    The FastAPI service will be running at `http://localhost:8000`
