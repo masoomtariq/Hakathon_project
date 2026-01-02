@@ -16,7 +16,7 @@ const config: Config = {
   // 1. UPDATE THIS: URL of your deployed Render backend
   // Do not add a trailing slash (e.g., use "https://my-app.onrender.com")
   customFields: {
-    chatbotBackendUrl: 'https://masoom-ai-book.vercel.app',
+    chatbotBackendUrl: 'https://masoomtariq-rag-services.hf.space',
   },
 
   // Set the production url of your site here
